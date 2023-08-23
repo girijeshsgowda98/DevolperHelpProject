@@ -2,11 +2,10 @@
 
 namespace Dashboard.Controllers
 {
-    public class InsertQuery : Controller
+    public class ExceptionListController : Controller
     {
         public IActionResult Index()
         {
-
             return View();
         }
     }

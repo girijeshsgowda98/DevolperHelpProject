@@ -2,7 +2,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div class="container-md ">
+    <a asp-controller="InsertQuery" asp-action="Upload" class="btn btn-primary" style="width:150px">
+        InsertQuery
+    </a>
+
+    <a asp-controller="InsertQuery" asp-action="Upload" class="btn btn-primary" style="width:150px">
+        Api
+    </a>
+    <a asp-controller="InsertQuery" asp-action="Upload" class="btn btn-primary" style="width:150px">
+        Exceptions
+    </a>
 </div>
+
+@*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="InsertQuery" asp-action="Index">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+    </ul>
+</div>
+*@
