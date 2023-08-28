@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model RequestModel
+
+@{
+    Layout = "_Layout"; // If you have a layout
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #DDD;
+    }
+
+    tr:hover {
+        background-color: #D6EEEE;
+    }
+</style>
+
+<h2>Api List</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ModuleName</th>
+            <th>Controler</th>
+            <th>Action</th>
+            <th>RequestTime</th>
+            <th>ResponseTime</th>
+            <th>TotalRequest</th>
+            <th>AverageTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var @group in Model.RequestDataModel )
+        {
+            <tr>
+                <td>@group.moduleName</td>
+                <td>@group.controlName</td>
+                <td>@group.actionName</td>
+                <td>@group.requestedon</td>
+                <td>@group.responseon</td>
+                <td>@group.TotalRequest</td>
+                <td>@group.AverageTime</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,3 +1,4 @@
+using Dashboard.DbService;
 using Dashboard.Repositories;
 using Dashboard.Repositories.IRepository;
 
@@ -13,6 +14,8 @@ builder.Services.AddControllersWithViews();
 }*/
 
 builder.Services.AddScoped<InsertQueryRepository>();
+builder.Services.AddScoped<RequestRepositoriesImp>();
+builder.Services.AddScoped<NpgsqlDbService>();
 var app = builder.Build();
 
 

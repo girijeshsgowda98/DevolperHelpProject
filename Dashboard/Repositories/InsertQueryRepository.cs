@@ -108,15 +108,6 @@ namespace Dashboard.Repositories
             return queries;
         }
 
-        private List<string> desiredcolumns(DataTable dataTable)
-        {
-            var desiredColumns = dataTable.Columns
-                   .Cast<DataColumn>()
-                   .Select(x => x.ColumnName)
-                   .ToList();
-            return desiredColumns;
-        }
-
         private List<string> commoncolums(DataTable dataTable)
         {
             var commonColumns = dataTable.Columns
