@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<InsertQueryRepository>();
 builder.Services.AddScoped<RequestRepositoriesImp>();
+builder.Services.AddScoped<ExceptionRepositories>();
 builder.Services.AddScoped<NpgsqlDbService>();
 var app = builder.Build();
 

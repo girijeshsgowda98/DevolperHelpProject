@@ -19,9 +19,6 @@ namespace Dashboard.Controllers
         
         public IActionResult Index()
         {
-            
-            // Execute a query
-            
             requestModel.RequestDataModel = _requestRepositories.requestImp(_dbService);
             return View(requestModel);
         }
