@@ -21,7 +21,7 @@ namespace Dashboard.Controllers
         //[HttpPost]
         public ActionResult Upload()
         {
-            string filePath = "C:\\Users\\DELL\\OneDrive\\Documents\\SuperAppDoc\\DashboardHelp\\User_matrix_data.xlsx";
+            string filePath = "C:\\Users\\girishkumarsharma\\Documents\\GirijeshProject\\InsertQueryDoc\\UserData_Matrix.xlsx";
             //string filePath = _config.GetConnectionString("filePath");
             List<string> insertQueries = new List<string>();
             if (filePath != null)

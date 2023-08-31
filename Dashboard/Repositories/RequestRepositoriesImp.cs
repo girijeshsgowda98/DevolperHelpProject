@@ -8,16 +8,18 @@ namespace Dashboard.Repositories
         List<RequestDataModel> requestData = new List<RequestDataModel>();
         public List<RequestDataModel> requestImp(NpgsqlDbService _dbService)
         {
-            var sql = "SELECT modulename, controlname, actionname, requestedon, responseon FROM public.requestandresp;";
+            var sql = "SELECT modulename, controlname, actionname, requestedon, responseon FROM usermaster.tbl_api_reqresp_logs;";
             var reader = _dbService.ExecuteQuery(sql);
 
             while (reader.Read())
             {
                 requestData.Add(new RequestDataModel
                 {
-                    moduleName = reader.GetString(0),
-                    controlName = reader.GetString(1),
-                    actionName = reader.GetString(2),
+                    moduleName = reader.IsDBNull(0) ? "Unknown" : reader.GetString(0),
+                     //controlName = string.IsNullOrEmpty(reader.GetString(1))?string.Empty: reader.GetString(1),
+                     //actionName = string.IsNullOrEmpty(reader.GetString(2)) ? "Unknown" : reader.GetString(2),
+                    controlName = reader.IsDBNull(1)? "Unknown":reader.GetString(1),
+                    actionName = reader.IsDBNull(2) ? "Unknown" : reader.GetString(2),
                     requestedon = reader.GetDateTime(3),
                     responseon = reader.GetDateTime(4)
                 });
@@ -32,8 +34,8 @@ namespace Dashboard.Repositories
                    requestedon = group.Select(r => r.requestedon).First(),
                    responseon = group.Select(r => r.responseon).First(),
                    TotalRequest = group.Count(),
-                   AverageTime = Math.Round(group.Average(r => r.requestedon.Millisecond) / group.Count(), 2)
-               })
+                   AverageTime = Math.Round(group.Average(r => r.requestedon.Millisecond), 2)
+               }).OrderByDescending(r => r.TotalRequest)
                .ToList();
             return result;
         }
