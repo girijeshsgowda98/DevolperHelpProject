@@ -10,8 +10,7 @@
         public string? moduleName { get; set; }
         public string? controlName { get; set; }
         public string? actionName { get; set; }
-        public DateTime requestedon { get; set; }
-        public DateTime responseon { get; set; }
+        public DateTime createdon { get; set; }
         public int? TotalExceptions { get; set; }
     }
 }

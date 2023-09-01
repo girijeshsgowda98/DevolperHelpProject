@@ -35,7 +35,7 @@ namespace Dashboard.Repositories
                    responseon = group.Select(r => r.responseon).First(),
                    TotalRequest = group.Count(),
                    AverageTime = Math.Round(group.Average(r => r.requestedon.Millisecond), 2)
-               }).OrderByDescending(r => r.TotalRequest)
+               }).Where(r => !r.moduleName.Contains("Unknown")).OrderByDescending(r => r.TotalRequest)
                .ToList();
             return result;
         }
