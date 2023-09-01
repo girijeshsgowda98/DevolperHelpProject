@@ -53,3 +53,29 @@
         }
     </tbody>
 </table>
+</br>
+<h2>Request List Top 5 Most</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ModuleName</th>
+            <th>Controler</th>
+            <th>Action</th>
+            <th>RequestTime</th>
+            <th>ResponseTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var @group in Model.RequestListModel)
+        {
+            <tr>
+                <td>@group.moduleName</td>
+                <td>@group.controlName</td>
+                <td>@group.actionName</td>
+                <td>@group.requestedon</td>
+                <td>@group.responseon</td>
+            </tr>
+        }
+    </tbody>
+</table>

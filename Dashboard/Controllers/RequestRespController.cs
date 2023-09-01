@@ -20,6 +20,7 @@ namespace Dashboard.Controllers
         public IActionResult Index()
         {
             requestModel.RequestDataModel = _requestRepositories.requestImp(_dbService);
+            requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService);
             return View(requestModel);
         }
     }
