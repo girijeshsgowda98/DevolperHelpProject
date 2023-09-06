@@ -50,3 +50,27 @@
         }
     </tbody>
 </table>
+</br>
+<h2>Exception Top 3 based on Action</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ModuleName</th>
+            <th>Controler</th>
+            <th>Action</th>
+            <th>LastCreatedTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var @group in Model.ExceptionsDataModel)
+        {
+            <tr>
+                <td>@group.moduleName</td>
+                <td>@group.controlName</td>
+                <td>@group.actionName</td>
+                <td>@group.createdon</td>
+            </tr>
+        }
+    </tbody>
+</table>

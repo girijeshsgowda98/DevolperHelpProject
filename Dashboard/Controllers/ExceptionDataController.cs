@@ -18,6 +18,7 @@ namespace Dashboard.Controllers
         public IActionResult Index()
         {
             exceptionModel.ExceptionsDataModel = _exceptionRepositories.ExceptionImp(_dbService);
+            exceptionModel.ExceptionsListModel = _exceptionRepositories.ExceptionListImp(_dbService);
             return View(exceptionModel);
         }
     }

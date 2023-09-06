@@ -1,33 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<html>
+<head>
+<style>
+    .bg-image
+        {
+            background-image: url(Images/baground/motilaloswal.jpg.png);
+            background-color: #000000;
+            /*height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    
+</style>
+</head>
+<body class="bg-image text-white">
+    <form action="@Url.Action("FilterItems", "YourControllerName")" method="get">
+        @*<label for="nameFilter">Name:</label>*@
+        <input type="text" name="type" id="typeid" placeholder="Type" />
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
+        @*<label for="categoryFilter">Category:</label>*@
+        <input type="text" name="modulename" id="modulenameid" placeholder="moduleName"/>
 
-<div class="container-md ">
-    <a asp-controller="InsertQuery" asp-action="Upload" class="btn btn-primary" style="width:150px">
-        InsertQuery
-    </a>
+        @*<label for="priceFilter">Price:</label>*@
+        <input type="text" name="input" id="inputid" placeholder="Input"/>
 
-    <a asp-controller="RequestResp" asp-action="Index" class="btn btn-primary" style="width:150px">
-        Api
-    </a>
-    <a asp-controller="ExceptionData" asp-action="Index" class="btn btn-primary" style="width:150px">
-        Exceptions
-    </a>
-</div>
+        <input type="submit" value="Filter" />
+    </form>
+</body>
 
-@*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-    <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="InsertQuery" asp-action="Index">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </li>
-    </ul>
-</div>
-*@
+</html>

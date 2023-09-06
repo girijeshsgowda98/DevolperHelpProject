@@ -1,8 +1,10 @@
 ﻿using OfficeOpenXml;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 namespace Dashboard.Repositories
 {
@@ -97,6 +99,7 @@ namespace Dashboard.Repositories
                     k++;
                     columnNames = ("contextType,kyctype,access,type,condition,updatedon,updatedoff");
                     //columnNames = columnNames.TrimEnd(',');
+                    columnValues +=   true + "," + "now()" + "," + "now()" + ",";
                     columnValues = columnValues.TrimEnd(',');
 
                     string insertQuery = $"INSERT INTO {tableName} ({columnNames}) VALUES ({columnValues});";
