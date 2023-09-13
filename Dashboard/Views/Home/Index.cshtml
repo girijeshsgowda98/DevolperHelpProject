@@ -1,8 +1,33 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<html>
+<head>
+<style>
+    .bg-image
+        {
+            background-image: url(Images/baground/motilaloswal.jpg.png);
+            background-color: #000000;
+            /*height: 500px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    
+</style>
+</head>
+<body class="bg-image text-white">
+    @*@using (Html.BeginForm("FilterProducts", "Filter", FormMethod.Get))
+    {
+        <input type="text" name="type" placeholder="Type">
+        <input type="text" name="modulename" placeholder="ModuleName">
+        <input type="text" name="input" placeholder="Input">
+        <input type="submit" value="Filter">
+    }*@
+</body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</html>
