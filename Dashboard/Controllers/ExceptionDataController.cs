@@ -15,7 +15,7 @@ namespace Dashboard.Controllers
             _dbService = dbService;
             _exceptionRepositories = exceptionRepositories;
         }
-        public IActionResult Index()
+        public IActionResult Index(string query)
         {
             exceptionModel.ExceptionsDataModel = _exceptionRepositories.ExceptionImp(_dbService);
             exceptionModel.ExceptionsListModel = _exceptionRepositories.ExceptionListImp(_dbService);

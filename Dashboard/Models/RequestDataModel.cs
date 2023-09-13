@@ -16,6 +16,10 @@ namespace Dashboard.Models
         public DateTime responseon { get; set; }
         public int? TotalRequest { get; set; }
         public double AverageTime { get; set; }
+        public string? uniqueid { get; set; }
+        public string? usermasterid { get; set; }
+        public string? cliendcode { get; set;}
+        public string? uccid { get; set; }
     }
 
     public class RequestListModel

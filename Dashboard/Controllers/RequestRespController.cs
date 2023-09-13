@@ -17,7 +17,7 @@ namespace Dashboard.Controllers
             _requestRepositories = requestRepositories;
         }
         
-        public IActionResult Index()
+        public IActionResult Index(string query)
         {
             requestModel.RequestDataModel = _requestRepositories.requestImp(_dbService);
             requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService);

@@ -21,18 +21,13 @@
 </style>
 </head>
 <body class="bg-image text-white">
-    <form action="@Url.Action("FilterItems", "YourControllerName")" method="get">
-        @*<label for="nameFilter">Name:</label>*@
-        <input type="text" name="type" id="typeid" placeholder="Type" />
-
-        @*<label for="categoryFilter">Category:</label>*@
-        <input type="text" name="modulename" id="modulenameid" placeholder="moduleName"/>
-
-        @*<label for="priceFilter">Price:</label>*@
-        <input type="text" name="input" id="inputid" placeholder="Input"/>
-
-        <input type="submit" value="Filter" />
-    </form>
+    @*@using (Html.BeginForm("FilterProducts", "Filter", FormMethod.Get))
+    {
+        <input type="text" name="type" placeholder="Type">
+        <input type="text" name="modulename" placeholder="ModuleName">
+        <input type="text" name="input" placeholder="Input">
+        <input type="submit" value="Filter">
+    }*@
 </body>
 
 </html>

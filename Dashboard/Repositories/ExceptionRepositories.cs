@@ -9,7 +9,7 @@ namespace Dashboard.Repositories
         List<ExceptionsListModel> exceptionList = new List<ExceptionsListModel>();
         public List<ExceptionsDataModel> ExceptionImp(NpgsqlDbService _dbService)
         {
-            var sql = "SELECT modulename, controlname, exception, actionname, createdon FROM usermaster.tbl_api_exception_logs;";
+            var sql = "SELECT modulename, controlname, exception, actionname, createdon FROM usermaster.tbl_api_exception_logs order by createdon desc;";
             var reader = _dbService.ExecuteQuery(sql);
 
             while (reader.Read())
@@ -38,7 +38,7 @@ namespace Dashboard.Repositories
 
         public List<ExceptionsListModel> ExceptionListImp(NpgsqlDbService _dbService)
         {
-            var sql = "SELECT modulename, controlname, exception, actionname, createdon FROM usermaster.tbl_api_exception_logs;";
+            var sql = "SELECT modulename, controlname, exception, actionname, createdon FROM usermaster.tbl_api_exception_logs order by createdon desc;";
             var reader = _dbService.ExecuteQuery(sql);
 
             while (reader.Read())
@@ -58,9 +58,31 @@ namespace Dashboard.Repositories
                    moduleName = group.Key,
                    controlName = group.Select(r => r.controlName).First(),
                    actionName = group.Select(r => r.actionName).First(),
-                   createdon = group.Select(r => r.createdon).First()
-               }).Take(3).ToList();
+                   createdon = group.Select(r => r.createdon).First(),
+                   TotalExceptions = group.Count()
+               }).OrderByDescending(r=>r.TotalExceptions).Take(3).ToList();
             return result;
+        }
+
+        public List<ExceptionsDataModel> ExceptionImpFilter(NpgsqlDbService dbService, string moduleName, string input)
+        {
+            var sql = "SELECT modulename, controlname, exception, actionname, createdon, uniqueid,cliendcode, uccid FROM usermaster.tbl_api_exception_logs order by createdon desc;";
+            var reader = dbService.ExecuteQuery(sql);
+
+            while (reader.Read())
+            {
+                exceptionData.Add(new ExceptionsDataModel
+                {
+                    moduleName = reader.IsDBNull(0) ? "Unknown" : reader.GetString(0),
+                    controlName = reader.IsDBNull(1) ? "Unknown" : reader.GetString(1),
+                    actionName = reader.IsDBNull(3) ? "Unknown" : reader.GetString(3),
+                    createdon = reader.GetDateTime(4),
+                    uniqueid = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5),
+                    cliendcode = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6),
+                    uccid = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7)
+                }) ;
+            }
+            return exceptionData;
         }
     }
     }

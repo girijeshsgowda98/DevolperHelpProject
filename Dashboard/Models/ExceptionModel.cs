@@ -13,6 +13,9 @@
         public string? actionName { get; set; }
         public DateTime createdon { get; set; }
         public int? TotalExceptions { get; set; }
+        public string uniqueid { get; set; }
+        public string cliendcode { get; set;}
+        public string uccid { get; set; }
     }
     public class ExceptionsListModel
     {

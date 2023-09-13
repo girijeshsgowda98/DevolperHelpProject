@@ -23,7 +23,7 @@
     }
 </style>
 
-<h2>Exception List</h2>
+<h4>Exception List</h4>
 
 <table>
     <thead>
@@ -51,7 +51,7 @@
     </tbody>
 </table>
 </br>
-<h2>Exception Top 3 based on Action</h2>
+<h4>Exception Top 3 based on Action</h4>
 
 <table>
     <thead>
@@ -63,7 +63,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var @group in Model.ExceptionsDataModel)
+        @foreach (var @group in Model.ExceptionsListModel)
         {
             <tr>
                 <td>@group.moduleName</td>

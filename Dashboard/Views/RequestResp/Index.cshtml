@@ -22,8 +22,12 @@
         background-color: #D6EEEE;
     }
 </style>
-
-<h2>Api List</h2>
+<form action="@Url.Action("Index", "RequestResp")" method="get" class="d-flex">
+    <i class="bi bi-search"></i>
+    <input class="form-control me-2" type="text" name="query" placeholder="Search" aria-label="Search">
+    <button type="submit" class="btn btn-default">Search</button>
+</form>
+<h4>Api List</h4>
 
 <table>
     <thead>
@@ -54,7 +58,7 @@
     </tbody>
 </table>
 </br>
-<h2>Request List Top 5 Most</h2>
+<h4>Request List Top 5 Most</h4>
 
 <table>
     <thead>
