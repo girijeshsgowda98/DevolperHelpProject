@@ -3,6 +3,7 @@
     public class FilterModel
     {
        public string type { get; set; }
+        public string control { get; set; }
        public string moduleName { get; set; }
        public string input { get; set; }
 

@@ -59,13 +59,6 @@
                             </div>
                         </li>
                     </ul>
-                    @using (Html.BeginForm("Index", "Filter", FormMethod.Get))
-                    {
-                        <input type="text" name="type" placeholder="Type">
-                        <input type="text" name="modulename" placeholder="ModuleName">
-                        <input type="text" name="input" placeholder="Input">
-                        <input type="submit" value="Filter">
-                    }
                    @* <form action="@Url.Action("Index", "RequestResp")" method="get" class="d-flex">
                         <i class="bi bi-search"></i>
                         <input class="form-control me-2"  type="text" name="query" placeholder="Search" aria-label="Search">

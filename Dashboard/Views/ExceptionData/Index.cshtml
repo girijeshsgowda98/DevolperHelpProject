@@ -6,32 +6,23 @@
 @{
     Layout = "_Layout"; // If you have a layout
 }
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #DDD;
-    }
-
-    tr:hover {
-        background-color: #D6EEEE;
-    }
-</style>
+<body>   
+@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
+{
+        <div class="input-container">
+            <input type="hidden" name="type" value="Exceptions">
+            <input type="text" name="modulename" placeholder="ModuleName">
+            <input type="text" name="control" placeholder="Controller">
+            <input type="text" name="input" placeholder="Input">
+            <input type="submit" value="Filter">
+        </div>
+}
 
 <h4>Exception List</h4>
-
-<table>
+    <table class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>
-            @*<th>Controler</th>
-            <th>Action</th>
-            <th>LastCreatedTime</th>*@
             <th>TotalException</th>
         </tr>
     </thead>
@@ -40,10 +31,6 @@
         {
             <tr>
                 <td>@group.moduleName</td>
-               @* <td>@group.controlName</td>
-                <td>@group.actionName</td>
-                <td>@group.requestedon</td>
-                <td>@group.responseon</td>*@
                 <td>@group.TotalExceptions</td>
 
             </tr>
@@ -53,7 +40,7 @@
 </br>
 <h4>Exception Top 3 based on Action</h4>
 
-<table>
+    <table class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>
@@ -74,3 +61,4 @@
         }
     </tbody>
 </table>
+</body>

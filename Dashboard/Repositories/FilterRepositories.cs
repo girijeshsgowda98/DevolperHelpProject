@@ -11,7 +11,8 @@ namespace Dashboard.Repositories
         public ExceptionRepositories _exceptionRepositories;
         List<RequestDataModel> requestData = new List<RequestDataModel>();
         List<ExceptionsDataModel> exceptionData = new List<ExceptionsDataModel>();
-        FilterListModel filterModel = new FilterListModel();
+        //FilterListModel filterModel = new FilterListModel();
+        FilterListModel result = new FilterListModel();
 
         public NpgsqlDbService _dbService;
         public FilterRepositories(NpgsqlDbService dbService,RequestRepositoriesImp requestRepositoriesImp, ExceptionRepositories exceptionRepositories)
@@ -20,47 +21,67 @@ namespace Dashboard.Repositories
             _requestRepositories = requestRepositoriesImp;
             _exceptionRepositories= exceptionRepositories;
         }
-        public FilterListModel FilterImp(string type, string moduleName, string input)
+        public FilterListModel FilterImp(string type, string moduleName, string control, string input)
         {
+            
             if (type == "Apis")
             {
-                var result = _requestRepositories.requestImpFilter(_dbService,moduleName,input).Take(100).ToList();
+                if (moduleName == null & control == null & input == null)
+                {
+                     result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Take(100).ToList();
+                }
                 
                 if (moduleName != null)
                 {
-                    if (input != null)
+                    if (control != null)
                     {
-                        result = _requestRepositories.requestImpFilter(_dbService,moduleName,input).Where(r =>  (r.cliendcode == input || r.uccid == input || r.uniqueid == input || r.usermasterid == input) &  r.moduleName == moduleName).Take(100).ToList();
-                        
+                        if (input != null)
+                        {
+                            result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Where(r => (r.cliendcode == input || r.uccid == input || r.uniqueid == input || r.usermasterid == input) & r.moduleName == moduleName & r.controlName == control).Take(100).ToList();
+
+                        }
+                        if (input == null)
+                        {
+                            result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Where(r => r.moduleName == moduleName & r.controlName == control).Take(100).ToList();
+                        }
                     }
-                    if (input == null)
+                    if(control == null & input == null)
                     {
-                        result = _requestRepositories.requestImpFilter(_dbService,moduleName,input).Where(r => r.moduleName == moduleName).Take(100).ToList();
+                        result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Where(r => r.moduleName == moduleName).Take(10).ToList();
                     }
                    
                 }
-                filterModel.RequestDataModel = result;
             }
             if (type == "Exceptions")
             {
-                var result2 = _exceptionRepositories.ExceptionImpFilter(_dbService, moduleName, input).OrderByDescending(r=>r.createdon).Take(10).ToList();
+                if (moduleName == null & control == null & input == null)
+                {
+                    result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).OrderByDescending(r => r.createdon).Take(10).ToList();
+                }
+                
                 if (moduleName != null)
                 {
-                    if (input != null)
-                    {
-                        result2 = _exceptionRepositories.ExceptionImpFilter(_dbService, moduleName, input).Where(r => (r.cliendcode == input || r.uccid == input || r.uniqueid == input ) & r.moduleName == moduleName).OrderByDescending(r => r.createdon).Take(10).ToList();
 
-                    }
-                    if (input == null)
+                    if (control != null)
                     {
-                        result2 = _exceptionRepositories.ExceptionImpFilter(_dbService, moduleName, input).Where(r => r.moduleName == moduleName).OrderByDescending(r => r.createdon).Take(10).ToList();
-                    }
+                        if (input != null)
+                        {
+                            result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).Where(r => (r.cliendcode == input || r.uccid == input || r.uniqueid == input) & r.moduleName == moduleName & r.controlName == control).OrderByDescending(r => r.createdon).Take(10).ToList();
 
+                        }
+                        if (input == null)
+                        {
+                            result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).Where(r => r.moduleName == moduleName & r.controlName == control).OrderByDescending(r => r.createdon).Take(10).ToList();
+                        }
+                    }
+                    if (control == null & input == null)
+                    {
+                        result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).Where(r => r.moduleName == moduleName).Take(100).ToList();
+                    }
                 }
-                filterModel.ExceptionsDataModel = result2;
             }
 
-            return filterModel;
+            return result;
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Dashboard.Repositories
             }*/
             return result;
         }
-        public List<RequestDataModel> requestImpFilter(NpgsqlDbService dbService,string modulename,string input)
+        public List<RequestDataModel> requestImpFilter(NpgsqlDbService dbService)
         {
             var sql = "SELECT modulename, controlname, actionname, requestedon, responseon,uniqueid, usermasterid, cliendcode, uccid FROM usermaster.tbl_api_reqresp_logs where modulename is not null and controlname is not null and actionname is not null and uniqueid is not null and usermasterid is not null and cliendcode is not null and uccid is not null order by requestedon desc;";
             var reader = dbService.ExecuteQuery(sql);

@@ -11,9 +11,9 @@ namespace Dashboard.Controllers
         {
             _filterRepositories = filterRepositories;
         }
-        public IActionResult Index(string type,string modulename,string input)
+        public IActionResult Index(string type, string modulename,string control,string input)
         {
-            var result = _filterRepositories.FilterImp(type, modulename, input);
+            var result = _filterRepositories.FilterImp(type,modulename, control, input);
             return View(result);
         }
     }

@@ -6,7 +6,7 @@
 @{
     Layout = "_Layout"; // If you have a layout
 }
-<style>
+@*<style>
     table {
         border-collapse: collapse;
         width: 100%;
@@ -21,15 +21,25 @@
     tr:hover {
         background-color: #D6EEEE;
     }
-</style>
-<form action="@Url.Action("Index", "RequestResp")" method="get" class="d-flex">
+</style>*@
+@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
+{
+    <div class="input-container">
+        <input type="hidden" name="type" value="Apis">
+        <input type="text" name="modulename" placeholder="ModuleName">
+        <input type="text" name="control" placeholder="Control">
+        <input type="text" name="input" placeholder="Input">
+        <input type="submit" value="Filter">
+    </div>
+}
+@*<form action="@Url.Action("Index", "RequestResp")" method="get" class="d-flex">
     <i class="bi bi-search"></i>
     <input class="form-control me-2" type="text" name="query" placeholder="Search" aria-label="Search">
     <button type="submit" class="btn btn-default">Search</button>
-</form>
-<h4>Api List</h4>
+</form>*@
+<h4 class="head-font">Api List</h4>
 
-<table>
+<table class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>
@@ -60,7 +70,7 @@
 </br>
 <h4>Request List Top 5 Most</h4>
 
-<table>
+<table class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>

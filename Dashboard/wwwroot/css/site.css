@@ -20,3 +20,35 @@ body {
 footer {
     position: fixed;
 }
+.input-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .input-container input {
+        margin-left: 10px; /* Add some space between the input boxes if needed */
+    }
+
+.head-font {
+    font-weight:bolder;
+}
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+    .content-table thead tr {
+        background-color: #009879;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+    }

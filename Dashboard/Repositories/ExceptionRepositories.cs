@@ -64,7 +64,7 @@ namespace Dashboard.Repositories
             return result;
         }
 
-        public List<ExceptionsDataModel> ExceptionImpFilter(NpgsqlDbService dbService, string moduleName, string input)
+        public List<ExceptionsDataModel> ExceptionImpFilter(NpgsqlDbService dbService)
         {
             var sql = "SELECT modulename, controlname, exception, actionname, createdon, uniqueid,cliendcode, uccid FROM usermaster.tbl_api_exception_logs order by createdon desc;";
             var reader = dbService.ExecuteQuery(sql);
