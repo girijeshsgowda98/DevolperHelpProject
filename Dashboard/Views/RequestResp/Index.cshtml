@@ -6,23 +6,8 @@
 @{
     Layout = "_Layout"; // If you have a layout
 }
-@*<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #DDD;
-    }
-
-    tr:hover {
-        background-color: #D6EEEE;
-    }
-</style>*@
-@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
+<partial name="_filterLogic" />
+@*@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
 {
     <div class="input-container">
         <input type="hidden" name="type" value="Apis">
@@ -31,15 +16,11 @@
         <input type="text" name="input" placeholder="Input">
         <input type="submit" value="Filter">
     </div>
-}
-@*<form action="@Url.Action("Index", "RequestResp")" method="get" class="d-flex">
-    <i class="bi bi-search"></i>
-    <input class="form-control me-2" type="text" name="query" placeholder="Search" aria-label="Search">
-    <button type="submit" class="btn btn-default">Search</button>
-</form>*@
+}*@
+
 <h4 class="head-font">Api List</h4>
 
-<table class="content-table">
+<table id="tableData" class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>
@@ -51,7 +32,8 @@
             <th>AverageTime</th>
         </tr>
     </thead>
-    <tbody>
+    </table>
+    @*<tbody>
         @foreach (var @group in Model.RequestDataModel )
         {
             <tr>
@@ -92,4 +74,7 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
+@section Scripts{
+    <script src="~/js/RequestResp.js"></script>
+}

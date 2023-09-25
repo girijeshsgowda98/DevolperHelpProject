@@ -1,0 +1,39 @@
+﻿
+@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
+{
+    <div class="input-container">
+        <input type="text" id="apps" name="type" placeholder="Types">
+        <input type="text" name="modulename" placeholder="ModuleName">
+        <input type="text" name="control" placeholder="Control">
+        <input type="text" name="input" placeholder="Input">
+        <input type="submit" value="Filter">
+    </div>
+}
+
+<script>
+    //document.getElementById("apps").value = "Apis";
+
+    /*var liquor_selected = document.querySelector('#dropcontainer');
+    var selected = liquor_selected.addEventListener('click', function (e) {
+        if(liquor_selected.getElementsByClassName("apis"))
+        {
+        document.getElementById("apps").value = "Apis"
+        }
+        if (liquor_selected.getElementsByClassName("exceptions")) {
+            document.getElementById("apps").value = "Exceptions"
+        }
+});*/
+    function toggledropdown() {
+        var dropdown = document.getElementById('dropcontainer');
+
+        var  output = dropdown.value;
+
+        if (output == "Apis") {
+            document.getElementById("apps").value = "Apis"
+        }
+        if (output == "Exceptions") {
+            document.getElementById("apps").value = "Exceptions"
+        }
+        
+    
+</script>

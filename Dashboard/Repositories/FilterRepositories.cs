@@ -21,11 +21,17 @@ namespace Dashboard.Repositories
             _requestRepositories = requestRepositoriesImp;
             _exceptionRepositories= exceptionRepositories;
         }
-        public FilterListModel FilterImp(string type, string moduleName, string control, string input)
+        /*public FilterListModel FilterImp(string type, string moduleName, string control, string input)
         {
             
             if (type == "Apis")
             {
+                if (moduleName == null & control == null & input != null)
+                {
+                    result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Where(r => (r.cliendcode == input || r.uccid == input || r.uniqueid == input || r.usermasterid == input) ).Take(1000).ToList();
+
+                }
+
                 if (moduleName == null & control == null & input == null)
                 {
                      result.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).Take(100).ToList();
@@ -54,6 +60,11 @@ namespace Dashboard.Repositories
             }
             if (type == "Exceptions")
             {
+                if (moduleName == null & control == null & input != null)
+                {
+                    result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).Where(r => r.cliendcode == input || r.uccid == input || r.uniqueid == input).Take(1000).ToList();
+
+                }
                 if (moduleName == null & control == null & input == null)
                 {
                     result.ExceptionsDataModel = _exceptionRepositories.ExceptionImpFilter(_dbService).OrderByDescending(r => r.createdon).Take(10).ToList();
@@ -82,6 +93,6 @@ namespace Dashboard.Repositories
             }
 
             return result;
-        }
+        }*/
     }
 }

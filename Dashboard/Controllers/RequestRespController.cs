@@ -23,5 +23,14 @@ namespace Dashboard.Controllers
             requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService);
             return View(requestModel);
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            requestModel.RequestDataModel = _requestRepositories.requestImp(_dbService);
+            var data = requestModel.RequestDataModel;
+            return Json(new { data });
+        }
+        #endregion
     }
 }

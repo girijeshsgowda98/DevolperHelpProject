@@ -13,8 +13,9 @@ namespace Dashboard.Controllers
         }
         public IActionResult Index(string type, string modulename,string control,string input)
         {
-            var result = _filterRepositories.FilterImp(type,modulename, control, input);
-            return View(result);
+            /*var result = _filterRepositories.FilterImp(type,modulename, control, input);
+            return View(result);*/
+            return null;
         }
     }
 }

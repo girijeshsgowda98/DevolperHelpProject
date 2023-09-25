@@ -47,7 +47,7 @@ namespace Dashboard.Repositories
 
         public List<RequestListModel> requestListImp(NpgsqlDbService dbService)
         {
-            var sql = "SELECT modulename, controlname, actionname, requestedon, responseon FROM usermaster.tbl_api_reqresp_logs;";
+            var sql = "SELECT modulename, controlname, actionname, requestedon, responseon FROM usermaster.tbl_api_reqresp_logs limit 1000;";
             var reader = dbService.ExecuteQuery(sql);
             while (reader.Read())
             {
@@ -93,10 +93,10 @@ namespace Dashboard.Repositories
                     actionName = reader.IsDBNull(2) ? "Unknown" : reader.GetString(2),
                     requestedon = reader.GetDateTime(3),
                     responseon = reader.GetDateTime(4),
-                    uniqueid = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5),
+                   /* uniqueid = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5),
                     usermasterid = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6),
                     cliendcode = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7),
-                    uccid = reader.IsDBNull(8) ? "Unknown" : reader.GetString(8)
+                    uccid = reader.IsDBNull(8) ? "Unknown" : reader.GetString(8)*/
                 });
             }
             var result = requestData.ToList();

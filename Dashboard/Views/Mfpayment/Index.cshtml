@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model MfpaymentModel
+
+@{
+    Layout = "_Layout"; // If you have a layout
+}
+@*<partial name="_filterLogic" />
+*@@*@using (Html.BeginForm("Index", "Filter", FormMethod.Get))
+{
+    <div class="input-container">
+        <input type="hidden" name="type" value="Apis">
+        <input type="text" name="modulename" placeholder="ModuleName">
+        <input type="text" name="control" placeholder="Control">
+        <input type="text" name="input" placeholder="Input">
+        <input type="submit" value="Filter">
+    </div>
+}*@
+
+<h4 class="head-font">Mf Payment</h4>
+
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>Orderid</th>
+            <th>Razorpayid</th>
+            <th>Clientid</th>
+            <th>Ucid</th>
+            <th>Inserteddate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var @group in Model.MfpaymentDataModel)
+        {
+            <tr>
+                <td>@group.Orderid</td>
+                <td>@group.Razorpayid</td>
+                <td>@group.Clientid</td>
+                <td>@group.Ucid</td>
+                <td>@group.Inserteddate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
