@@ -18,9 +18,47 @@
     </div>
 }*@
 
-<h4 class="head-font">Api List</h4>
+@*<h4 class="head-font">Api List</h4>*@
+@{
+    var status = Context.Request.Query["status"];
+    var topRequest = "text-dark";
+    var details = "text-dark";
 
-<table id="tableData" class="content-table">
+    switch (status)
+    {
+        case "topRequest":
+            topRequest = "active text-white bg-dark";
+            break;
+        case "details":
+            details = "active text-white bg-dark";
+            break;
+        default:
+            break;
+    }
+}
+
+
+<div class=" my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-0">
+        <div class="row"> 
+            <div class="col-12 text-center">
+                <h4 class="text-white py-2">Api List</h4>
+                </div>
+        </div>
+    </div>
+<div class="card-body p-4">
+    <div class="d-flex justify-content-between pb-4 pt-2">
+        <span></span>
+        <ul class="list-group list-group-horizontal-sm">
+            <a style="text-decoration:none;" asp-controller="RequestResp" asp-action="Index" asp-route-status="topRequest">
+               <li class="list-group-item @topRequest">Top 5 Requst</li>
+            </a>
+            <a style="text-decoration:none;" asp-controller="RequestResp" asp-action="Index" asp-route-status="details">
+               <li class="list-group-item @details">Details</li>
+            </a>
+        </ul>
+    </div>
+<table id="tableData" >
     <thead>
         <tr>
             <th>ModuleName</th>
@@ -33,26 +71,12 @@
         </tr>
     </thead>
     </table>
-    @*<tbody>
-        @foreach (var @group in Model.RequestDataModel )
-        {
-            <tr>
-                <td>@group.moduleName</td>
-                <td>@group.controlName</td>
-                <td>@group.actionName</td>
-                <td>@group.requestedon</td>
-                <td>@group.responseon</td>
-                <td>@group.TotalRequest</td>
-                <td>@group.AverageTime</td>
-                
-            </tr>
-        }
-    </tbody>
-</table>
+    </div>
+</div>
 </br>
-<h4>Request List Top 5 Most</h4>
 
-<table class="content-table">
+@*<table class="content-table">
+<table id="tableData">
     <thead>
         <tr>
             <th>ModuleName</th>
@@ -62,18 +86,6 @@
             <th>ResponseTime</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var @group in Model.RequestListModel)
-        {
-            <tr>
-                <td>@group.moduleName</td>
-                <td>@group.controlName</td>
-                <td>@group.actionName</td>
-                <td>@group.requestedon</td>
-                <td>@group.responseon</td>
-            </tr>
-        }
-    </tbody>
 </table>*@
 @section Scripts{
     <script src="~/js/RequestResp.js"></script>

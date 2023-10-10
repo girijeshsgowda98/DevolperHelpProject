@@ -17,30 +17,81 @@
         <input type="submit" value="Filter">
     </div>
 }*@
+<div id="popup" class="hidden">
+    <div id="popup-content"></div>
+</div>
 
 <h4 class="head-font">Mf Payment</h4>
 
-<table class="content-table">
+@*<div id="filters">
+    <label for="lessThanInput">Less Than:</label>
+    <input type="text" id="lessThanInput">
+    <button id="lessThanButton">Filter</button>
+
+    <label for="greaterThanInput">Greater Than:</label>
+    <input type="text" id="greaterThanInput">
+    <button id="greaterThanButton">Filter</button>
+
+    <label for="equalToInput">Equal To:</label>
+    <input type="text" id="equalToInput">
+    <button id="equalToButton">Filter</button>
+</div>*@
+<div id="filters" class="mb-md-2">
+    <label for="idFilter">Filter by ID:</label>
+    <input type="text" id="idFilter">
+    <label><input type="checkbox" id="lessThanCheckbox"> Less Than</label>
+    <label><input type="checkbox" id="greaterThanCheckbox"> Greater Than</label>
+    <label><input type="checkbox" id="equalToCheckbox"> Equal To</label>
+    <button id="filterButton">Filter</button>
+</div>
+
+<table id="tblMfpaymentData" class="content-table">
     <thead>
         <tr>
-            <th>Orderid</th>
-            <th>Razorpayid</th>
+            <th>Id</th>
             <th>Clientid</th>
             <th>Ucid</th>
+            <th>Orderid</th>
+            <th>Apiname</th>
             <th>Inserteddate</th>
+            <th>Status</th>
+            <th>Remark</th>
+            <th>Request</th>
+            <th>Response</th>
+            <th>Dionrequest</th>
+            <th>Dionresponse</th>
         </tr>
     </thead>
-    <tbody>
+   @* <tbody>
         @foreach (var @group in Model.MfpaymentDataModel)
         {
-            <tr>
-                <td>@group.Orderid</td>
-                <td>@group.Razorpayid</td>
+            <tr><td>@group.Id</td>
                 <td>@group.Clientid</td>
                 <td>@group.Ucid</td>
+                <td>@group.Orderid</td>
+                <td>@group.Apiname</td>
                 <td>@group.Inserteddate</td>
+                <td>@group.Status</td>
+                <td>@group.Remark</td>
+                <td>@group.Request</td>
+                <td>@group.Response</td>
+                <td>@group.Dionrequest</td>
+                <td>@group.Dionresponse</td>
             </tr>
         }
-    </tbody>
+    </tbody>*@
 </table>
+
+<!-- Popup container -->
+<div id="contentPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-popup" id="closePopup">&times;</span>
+        <div id="popupContent"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/Mfpayment.js"></script>
+}
+
 

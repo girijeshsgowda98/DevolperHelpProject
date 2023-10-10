@@ -1,14 +1,10 @@
 ﻿$(document).ready(function () {
-    var url = window.location.search;
-    if (url.includes("topRequest")) {
-        loadDataTable("topRequest");
-    }
     loadDataTable();
 });
 
-function loadDataTable(status) {
-     dataTable = $('#tableData').DataTable({
-        "ajax": { url:'/requestResp/getall?status='+status},
+function loadDataTable() {
+     dataTable = $('#filterData').DataTable({
+        "ajax": { url:'/filter/getall'},
         "columns": [
             { data: 'moduleName' },
             { data: 'controlName'},

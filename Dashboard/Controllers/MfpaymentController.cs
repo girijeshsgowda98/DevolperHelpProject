@@ -20,5 +20,15 @@ namespace Dashboard.Controllers
             mfpayment.MfpaymentDataModel = _mfpaymentRepositories.MfpaymentImp(_dbService);
             return View(mfpayment);
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            mfpayment.MfpaymentDataModel = _mfpaymentRepositories.MfpaymentImp(_dbService);
+
+            var data = mfpayment.MfpaymentDataModel;
+            return Json(new { data });
+        }
+        #endregion
     }
 }

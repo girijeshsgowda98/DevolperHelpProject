@@ -1,4 +1,5 @@
-﻿using Dashboard.Repositories;
+﻿using Dashboard.Models;
+using Dashboard.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 
@@ -13,9 +14,19 @@ namespace Dashboard.Controllers
         }
         public IActionResult Index(string type, string modulename,string control,string input)
         {
-            /*var result = _filterRepositories.FilterImp(type,modulename, control, input);
-            return View(result);*/
+            var result = _filterRepositories.FilterImp(type,modulename, control, input);
+            return View(result);
             return null;
         }
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll(string type, string modulename, string control, string input)
+        {
+            var result = _filterRepositories.FilterImp(type, modulename, control, input);
+            var data = result;
+            return Json(new { data });
+        }
+        #endregion
+
     }
 }

@@ -21,7 +21,7 @@ namespace Dashboard.Repositories
             _requestRepositories = requestRepositoriesImp;
             _exceptionRepositories= exceptionRepositories;
         }
-        /*public FilterListModel FilterImp(string type, string moduleName, string control, string input)
+        public FilterListModel FilterImp(string type, string moduleName, string control, string input)
         {
             
             if (type == "Apis")
@@ -93,6 +93,6 @@ namespace Dashboard.Repositories
             }
 
             return result;
-        }*/
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Dashboard.DbService;
 using Dashboard.Models;
 using Dashboard.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dashboard.Controllers
@@ -10,11 +11,13 @@ namespace Dashboard.Controllers
         private readonly NpgsqlDbService _dbService;
         public RequestRepositoriesImp _requestRepositories;
         RequestModel requestModel = new RequestModel();
+        public FilterRepositories _filterRepositories;
 
-        public RequestRespController(NpgsqlDbService dbService,RequestRepositoriesImp requestRepositories)
+        public RequestRespController(NpgsqlDbService dbService,RequestRepositoriesImp requestRepositories, FilterRepositories filterRepositories)
         {
             _dbService = dbService;
             _requestRepositories = requestRepositories;
+            _filterRepositories = filterRepositories;
         }
         
         public IActionResult Index(string query)
@@ -23,11 +26,23 @@ namespace Dashboard.Controllers
             requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService);
             return View(requestModel);
         }
+
         #region API CALLS
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string status)
         {
             requestModel.RequestDataModel = _requestRepositories.requestImp(_dbService);
+            switch (status)
+            {
+                case "topRequest":
+                    requestModel.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).OrderByDescending(x => x.requestedon).Take(5).ToList();
+                    break;
+                case "details":
+                    requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService).OrderByDescending(x => x.requestedon).Take(100).ToList();
+                    break;
+                default:
+                    break;
+            }
             var data = requestModel.RequestDataModel;
             return Json(new { data });
         }

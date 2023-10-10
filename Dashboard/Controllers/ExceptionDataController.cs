@@ -21,5 +21,15 @@ namespace Dashboard.Controllers
             exceptionModel.ExceptionsListModel = _exceptionRepositories.ExceptionListImp(_dbService);
             return View(exceptionModel);
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            exceptionModel.ExceptionsDataModel = _exceptionRepositories.ExceptionImp(_dbService);
+            var data = exceptionModel.ExceptionsDataModel;
+            return Json(new { data });
+        }
+        #endregion
     }
 }

@@ -52,3 +52,30 @@ footer {
     .content-table td {
         padding: 12px 15px;
     }
+span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#popup {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 80%;
+    z-index: 9999;
+}
+
+table td {
+    max-width: 120px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+table.inputs td {
+    padding: 5px;
+}
+
