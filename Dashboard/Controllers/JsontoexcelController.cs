@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
+﻿
+using ClosedXML.Excel;
+using Dashboard.Models;
+using Grpc.Core;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OfficeOpenXml;
-using System;
 
 namespace Dashboard.Controllers
 {
@@ -14,59 +17,35 @@ namespace Dashboard.Controllers
         }
 
         [HttpPost]
-        public IActionResult ConvertJsonTextToExcel([FromBody] string jsonText)
+        public IActionResult ConvertJsonTextToExcel(string jsonData)
         {
-            if (string.IsNullOrWhiteSpace(jsonText))
+            
+            //var data = Newtonsoft.Json.JsonConvert.DeserializeObject<List<JsonToExcelModel>>(jsonData);
+
+            // Deserialize the JSON data into your model
+            var data = JsonConvert.DeserializeObject<List<JsonToExcelModel>>(jsonData);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Create a new Excel package
+            using (var package = new ExcelPackage())
             {
-                return BadRequest("JSON data is empty or invalid.");
+                var worksheet = package.Workbook.Worksheets.Add("Data");
+
+                // Add the column headers
+                worksheet.Cells["A1"].LoadFromCollection(data, true);
+
+                // Set content type and return the Excel file
+                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.Headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.Headers["Content-Disposition"] = "attachment; filename=ExcelDoc.xlsx";
+
+                Response.Body.Write(package.GetAsByteArray());
+                //Response.
+
+                //Response.BinaryWrite(package.GetAsByteArray());
             }
 
-            try
-            {
-                var jsonData = JArray.Parse(jsonText); // Parse the JSON text
-
-                using (var package = new ExcelPackage())
-                {
-                    var worksheet = package.Workbook.Worksheets.Add("Data");
-
-                    // Add headers from the first JSON object (assuming all objects have the same structure)
-                    if (jsonData.Count > 0)
-                    {
-                        var firstObject = jsonData[0];
-                        int columnCount = 1;
-
-                        foreach (var property in firstObject)
-                        {
-                            worksheet.Cells[1, columnCount].Value = property.Path;
-                            columnCount++;
-                        }
-
-                        // Populate data from JSON
-                        int rowCount = 2;
-                        foreach (var dataObject in jsonData)
-                        {
-                            int column = 1;
-                            foreach (var property in dataObject)
-                            {
-                                worksheet.Cells[rowCount, column].Value = property;
-                                column++;
-                            }
-                            rowCount++;
-                        }
-                    }
-
-                    // Create a memory stream
-                    var stream = new MemoryStream(package.GetAsByteArray());
-
-                    // Set the content type and file name for the response
-                    Response.Headers.Add("Content-Disposition", "attachment; filename=Data.xlsx");
-                    return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Error: {ex.Message}");
-            }
+            return new EmptyResult();
         }
     }
 }

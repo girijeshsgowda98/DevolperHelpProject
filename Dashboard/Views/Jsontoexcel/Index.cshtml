@@ -6,7 +6,14 @@
     Layout = "_Layout"; // If you have a layout
 }
 <h4>Insert json text here</h4>
-<form id="jsonForm">
+
+<form action="@Url.Action("ConvertJsonTextToExcel", "Jsontoexcel")" method="post" enctype="multipart/form-data">
+    @*<input type="file" name="jsonFile" id="jsonFile" accept=".json" />*@
+    <textarea name="jsonData" id="jsonData" rows="10" cols="40" placeholder="Enter JSON data"></textarea>
+    <button type="submit">Convert to Excel</button>
+</form>
+
+@*<form id="jsonForm">
     <textarea id="jsonInput" name="jsonText" rows="10" cols="50"></textarea>
     <br />
     <button type="button" id="convertButton">Convert to Excel</button>
@@ -19,7 +26,7 @@
             var jsonText = $("#jsonInput").val();
             $.ajax({
                 type: "POST",
-                url: "/Jsontoexcel/ConvertJsonTextToExcel",
+                url: '@Url.Action("ConvertJsonTextToExcel", "JsonToexcel")',
                 data: JSON.stringify(jsonText),
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
@@ -31,4 +38,4 @@
             });
         });
     });
-</script>
+</script>*@
