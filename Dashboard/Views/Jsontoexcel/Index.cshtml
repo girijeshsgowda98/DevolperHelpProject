@@ -7,7 +7,7 @@
 }
 <h4>Insert json text here</h4>
 
-<form action="@Url.Action("ConvertJsonTextToExcel", "Jsontoexcel")" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("ConvertJsonToExcel", "Jsontoexcel")" method="post" enctype="multipart/form-data">
     @*<input type="file" name="jsonFile" id="jsonFile" accept=".json" />*@
     <textarea name="jsonData" id="jsonData" rows="10" cols="40" placeholder="Enter JSON data"></textarea>
     <button type="submit">Convert to Excel</button>
