@@ -39,5 +39,11 @@
         public string model { get; set; }
         public string uuid { get; set; }
     }
+    
+}
+public class ClientModel
+{
+    public string? ClientTypeSum { get; set; }
+    public int? LoginCountSum { get; set; }
 }
 

@@ -57,6 +57,7 @@ namespace Dashboard.Controllers
             bool entry = false;
             // Counter to track the number of rows
             int rowCount = 0;
+            List<ClientModel> data = new List<ClientModel>();
 
             model = JsonConvert.DeserializeObject<JsonToExcelTextModel>(jsondata);
 
@@ -69,6 +70,8 @@ namespace Dashboard.Controllers
             dt.Columns.Add("IOSUser", typeof(string));
             dt.Columns.Add("Androidusers", typeof(string));
             dt.Columns.Add("Otherusers", typeof(string));
+            dt.Columns.Add("Client Type Sum", typeof(string));
+            dt.Columns.Add("Login Count Sum", typeof(string));
             dt.Columns.Add("Name", typeof(string));
             dt.Columns.Add("Mobile", typeof(string));
             dt.Columns.Add("UCC", typeof(string));
@@ -80,7 +83,7 @@ namespace Dashboard.Controllers
             dt.Columns.Add("Model", typeof(string));
             dt.Columns.Add("UUID", typeof(string));
 
-            
+            // For header modification first added empty row
             for (int i = 0; i < 3; i++)
             {
                 if (rowCount < 3)
@@ -118,7 +121,7 @@ namespace Dashboard.Controllers
                     if (model.message != null && temp == false)
                     {
 
-                        dt.Rows.Add(message, status, totaluser, iosusers, androidusers, otherusers, name, mobile, ucc, clientType, loginCount, eventTime, userIp, deviceinfo, modelinfo, uuid);
+                        dt.Rows.Add(message, status, totaluser, iosusers, androidusers, otherusers, "","",name, mobile, ucc, clientType, loginCount, eventTime, userIp, deviceinfo, modelinfo, uuid);
                         temp = true;
                         loginCountStatus = true;
                         userLoginStatus = true;
@@ -127,7 +130,8 @@ namespace Dashboard.Controllers
                     }
                     if(temp == true && loginCountStatus == false && userLoginStatus == false &&entry == false)
                     {
-                        dt.Rows.Add("", "", "", "", "", "", name, mobile, ucc, clientType, loginCount, eventTime, userIp, deviceinfo, modelinfo, uuid);
+                        dt.Rows.Add("", "", "", "", "", "", "", "", name, mobile, ucc, clientType, loginCount, eventTime, userIp, deviceinfo, modelinfo, uuid);
+                        
                         loginCountStatus = true;
                         userLoginStatus = true;
                         //entry = false;
@@ -136,13 +140,56 @@ namespace Dashboard.Controllers
                     }
                     if (temp == true && loginCountStatus == true && userLoginStatus == false && entry == false)
                     {
-                        dt.Rows.Add("", "", "", "", "", "", "", "", "", "", "", eventTime, userIp, deviceinfo, modelinfo, uuid);
+                        dt.Rows.Add("", "", "", "", "", "", "", "", "", "", "", "", "", eventTime, userIp, deviceinfo, modelinfo, uuid);
                         //entry = false;
                         //loginCountStatus = true;
                         
                     }
                 }
             }
+
+            int skippedRows = 0;
+            foreach (DataRow row in dt.Rows)
+            {
+                
+                if (skippedRows < 3)
+                {
+                    skippedRows++;
+                    continue; // Skip processing of the first 4 rows
+                }
+               
+                    var a = row[11];
+                    var b = row[12];
+                    if (row[11] != "" && row[12] != "")
+                    {
+                        ClientModel data1 = new ClientModel()
+                        {
+                        ClientTypeSum = row[11].ToString(), LoginCountSum = Convert.ToInt32(row[12])
+                        };
+                        data.Add(data1);
+                    }
+            }
+
+            var summedData = data
+            .GroupBy(item => item.ClientTypeSum)
+            .Select(group => new ClientModel
+            {
+                ClientTypeSum = group.Key,
+                LoginCountSum = group.Sum(item => item.LoginCountSum)
+            })
+            .ToList();
+            var tempdata = summedData;
+
+            //int skippedRows2 = 0;
+            int valinc = 3;
+            foreach (var val in summedData)
+            {
+                    dt.Rows[valinc][6] = val.ClientTypeSum;
+                    dt.Rows[valinc][7] = val.LoginCountSum.ToString();
+                    valinc++;
+                
+            }
+
 
             using (var package = new ExcelPackage())
             {
@@ -171,7 +218,7 @@ namespace Dashboard.Controllers
                 worksheet.Cells["A1"].Value = "Message";
                 worksheet.Cells["B1:B4"].Merge = true;
                 worksheet.Cells["B1"].Value = "Status";
-                worksheet.Cells["C1:P1"].Merge = true; // Merge cells for parent header
+                worksheet.Cells["C1:R1"].Merge = true; // Merge cells for parent header
                 worksheet.Cells["C1"].Value = "data";
                 // Set child column headers
                 worksheet.Cells["C2:C4"].Merge = true;
@@ -182,27 +229,31 @@ namespace Dashboard.Controllers
                 worksheet.Cells["E2"].Value = "Androidusers";
                 worksheet.Cells["F2:F4"].Merge = true;
                 worksheet.Cells["F2"].Value = "Otherusers";
+                worksheet.Cells["G2:G4"].Merge = true;
+                worksheet.Cells["G2"].Value = "Client Type Count";
+                worksheet.Cells["H2:H4"].Merge = true;
+                worksheet.Cells["H2"].Value = "Login Type Count";
 
-                worksheet.Cells["G2:P2"].Merge = true; // Merge cells for parent header
-                worksheet.Cells["G2"].Value = "userdetails";
-                worksheet.Cells["G3:G4"].Merge = true;
-                worksheet.Cells["G3"].Value = "Name";
-                worksheet.Cells["H3:H4"].Merge = true;
-                worksheet.Cells["H3"].Value = "Mobile";
+                worksheet.Cells["I2:R2"].Merge = true; // Merge cells for parent header
+                worksheet.Cells["I2"].Value = "userdetails";
                 worksheet.Cells["I3:I4"].Merge = true;
-                worksheet.Cells["I3"].Value = "UCC";
+                worksheet.Cells["I3"].Value = "Name";
                 worksheet.Cells["J3:J4"].Merge = true;
-                worksheet.Cells["J3"].Value = "Client Type";
+                worksheet.Cells["J3"].Value = "Mobile";
                 worksheet.Cells["K3:K4"].Merge = true;
-                worksheet.Cells["K3"].Value = "Login Count";
+                worksheet.Cells["K3"].Value = "UCC";
+                worksheet.Cells["L3:L4"].Merge = true;
+                worksheet.Cells["L3"].Value = "Client Type";
+                worksheet.Cells["M3:M4"].Merge = true;
+                worksheet.Cells["M3"].Value = "Login Count";
 
-                worksheet.Cells["L3:P3"].Merge = true; // Merge cells for parent header
-                worksheet.Cells["L3"].Value = "userloggeddevicedetails";
-                worksheet.Cells["L4"].Value = "Event Time";
-                worksheet.Cells["M4"].Value = "User IP";
-                worksheet.Cells["N4"].Value = "Device Info";
-                worksheet.Cells["O4"].Value = "Model";
-                worksheet.Cells["P4"].Value = "UUID";
+                worksheet.Cells["N3:R3"].Merge = true; // Merge cells for parent header
+                worksheet.Cells["N3"].Value = "userloggeddevicedetails";
+                worksheet.Cells["N4"].Value = "Event Time";
+                worksheet.Cells["O4"].Value = "User IP";
+                worksheet.Cells["P4"].Value = "Device Info";
+                worksheet.Cells["Q4"].Value = "Model";
+                worksheet.Cells["R4"].Value = "UUID";
 
                 Response.Clear();
                 excelFile = package.GetAsByteArray();

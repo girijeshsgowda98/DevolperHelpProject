@@ -14,7 +14,7 @@ namespace Dashboard.Repositories
         {
             var insertProcessor = new InsertQueryRepository();
             var dataTable = insertProcessor.ReadExcelData(filePath);
-            string tableName = "YourTableName";
+            string tableName = "usermaster.customermenuaccess";
             List<string> insertQueries = new List<string>();
             insertQueries = insertProcessor.GenerateAndExecuteInsertQueries(dataTable, tableName);
 
@@ -92,7 +92,7 @@ namespace Dashboard.Repositories
                         if (columns.ColumnName == commonstring.ElementAt(k))
                         {
                             //columnNames += columns.ColumnName + ",";
-                            columnValues += "'" + columns.ColumnName + "," + "'" + row[columns.ColumnName] + "',";
+                            columnValues += "'" + columns.ColumnName  + "'," + "'" + row[columns.ColumnName] + "',";
                             break;
                         }
                     }
