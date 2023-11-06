@@ -27,6 +27,13 @@ namespace Dashboard.Controllers
             return View(requestModel);
         }
 
+        public IActionResult TopRequest(string query)
+        {
+
+            requestModel.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).OrderByDescending(x => x.requestedon).Take(5).ToList();
+            return View(requestModel);
+        }
+
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll(string status)
@@ -36,9 +43,6 @@ namespace Dashboard.Controllers
             {
                 case "topRequest":
                     requestModel.RequestDataModel = _requestRepositories.requestImpFilter(_dbService).OrderByDescending(x => x.requestedon).Take(5).ToList();
-                    break;
-                case "details":
-                    requestModel.RequestListModel = _requestRepositories.requestListImp(_dbService).OrderByDescending(x => x.requestedon).Take(100).ToList();
                     break;
                 default:
                     break;

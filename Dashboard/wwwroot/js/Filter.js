@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    loadDataTable();
+    loadDataTable(type,modulename,control,input);
 });
 
-function loadDataTable() {
+function loadDataTable( type,modulename,control,input) {
      dataTable = $('#filterData').DataTable({
         "ajax": { url:'/filter/getall'},
         "columns": [
@@ -11,7 +11,9 @@ function loadDataTable() {
             { data: 'actionName',"width":"15%" },
             { data: 'requestedon' },
             { data: 'responseon' },
-            { data: 'totalRequest' },
-            { data: 'averageTime'}
+            { data: 'uniqueid' },
+            { data: 'usermasterid' },
+            { data: 'cliendcode' },
+            { data: 'uccid' },
     ]});
 }

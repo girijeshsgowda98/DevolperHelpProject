@@ -17,8 +17,6 @@ namespace Dashboard.Repositories
                 requestData.Add(new RequestDataModel
                 {
                     moduleName = reader.IsDBNull(0) ? "Unknown" : reader.GetString(0),
-                     //controlName = string.IsNullOrEmpty(reader.GetString(1))?string.Empty: reader.GetString(1),
-                     //actionName = string.IsNullOrEmpty(reader.GetString(2)) ? "Unknown" : reader.GetString(2),
                     controlName = reader.IsDBNull(1)? "Unknown":reader.GetString(1),
                     actionName = reader.IsDBNull(2) ? "Unknown" : reader.GetString(2),
                     requestedon = reader.GetDateTime(3),
@@ -38,10 +36,6 @@ namespace Dashboard.Repositories
                    AverageTime = Math.Round(group.Average(r => r.requestedon.Millisecond), 2)
                }).Where(r => !r.moduleName.Contains("Unknown")).OrderByDescending(r => r.TotalRequest)
                .ToList();
-            /*if(!string.IsNullOrEmpty(query))
-            {
-                result = result.Where(r => r.moduleName == query).ToList();
-            }*/
             return result;
         }
 
@@ -54,8 +48,6 @@ namespace Dashboard.Repositories
                 requestList.Add(new RequestListModel
                 {
                     moduleName = reader.IsDBNull(0) ? "Unknown" : reader.GetString(0),
-                    //controlName = string.IsNullOrEmpty(reader.GetString(1))?string.Empty: reader.GetString(1),
-                    //actionName = string.IsNullOrEmpty(reader.GetString(2)) ? "Unknown" : reader.GetString(2),
                     controlName = reader.IsDBNull(1) ? "Unknown" : reader.GetString(1),
                     actionName = reader.IsDBNull(2) ? "Unknown" : reader.GetString(2),
                     requestedon = reader.GetDateTime(3),
@@ -73,10 +65,6 @@ namespace Dashboard.Repositories
                    responseon = group.Select(r => r.responseon).First()
                }).Where(r => !r.moduleName.Contains("Unknown")).Take(5)
                .ToList();
-            /*if (!string.IsNullOrEmpty(query))
-            {
-                result = result.Where(r => r.moduleName == query).ToList();
-            }*/
             return result;
         }
         public List<RequestDataModel> requestImpFilter(NpgsqlDbService dbService)
@@ -92,18 +80,10 @@ namespace Dashboard.Repositories
                     controlName = reader.IsDBNull(1) ? "Unknown" : reader.GetString(1),
                     actionName = reader.IsDBNull(2) ? "Unknown" : reader.GetString(2),
                     requestedon = reader.GetDateTime(3),
-                    responseon = reader.GetDateTime(4),
-                   /* uniqueid = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5),
-                    usermasterid = reader.IsDBNull(6) ? "Unknown" : reader.GetString(6),
-                    cliendcode = reader.IsDBNull(7) ? "Unknown" : reader.GetString(7),
-                    uccid = reader.IsDBNull(8) ? "Unknown" : reader.GetString(8)*/
+                    responseon = reader.GetDateTime(4)
                 });
             }
             var result = requestData.ToList();
-            /*if(!string.IsNullOrEmpty(query))
-            {
-                result = result.Where(r => r.moduleName == query).ToList();
-            }*/
             return result;
         }
     }

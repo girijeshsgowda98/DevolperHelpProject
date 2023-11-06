@@ -8,14 +8,17 @@
 
 function loadDataTable(status) {
      dataTable = $('#tableData').DataTable({
-        "ajax": { url:'/requestResp/getall?status='+status},
+         "ajax": { url: '/requestResp/getall?status' + status },
         "columns": [
             { data: 'moduleName' },
-            { data: 'controlName'},
-            { data: 'actionName',"width":"15%" },
+            { data: 'controlName' },
+            { data: 'actionName', "width": "15%" },
             { data: 'requestedon' },
             { data: 'responseon' },
             { data: 'totalRequest' },
-            { data: 'averageTime'}
-    ]});
+            { data: 'averageTime' }
+        ]
+     });
 }
+
+

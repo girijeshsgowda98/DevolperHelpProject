@@ -29,11 +29,11 @@
 </form>*@
 
 <partial name="_filterLogic" />
-@if (Model.RequestDataModel != null)
-{
+@*@if (Model.RequestDataModel != null)
+{*@
     <h4>Api List</h4>
 
-    <table class="content-table">
+    <table class="content-table" id="filterData">
         <thead>
             <tr>
                 <th>ModuleName</th>
@@ -47,7 +47,7 @@
                 <th>UCCid</th>
             </tr>
         </thead>
-        <tbody>
+       @* <tbody>
             @foreach (var @group in Model.RequestDataModel)
             {
                 <tr>
@@ -56,20 +56,20 @@
                     <td>@group.actionName</td>
                     <td>@group.requestedon</td>
                     <td>@group.responseon</td>
-                    @*<td>@group.uniqueid</td>
+                    <td>@group.uniqueid</td>
                     <td>@group.usermasterid</td>
                     <td>@group.cliendcode</td>
-                    <td>@group.uccid</td>*@
+                    <td>@group.uccid</td>
                 </tr>
             }
-        </tbody>
+        </tbody>*@
     </table>
-    }
+    @*}*@
 </br>
 @if(Model.ExceptionsDataModel != null){
     <h4 >Exception List</h4>
 
-    <table class="content-table">
+    <table class="content-table" id="filterData">
         <thead>
             <tr>
                 <th>ModuleName</th>
@@ -81,7 +81,7 @@
                 <th>uccid</th>
             </tr>
         </thead>
-        <tbody>
+        @*<tbody>
             @foreach (var @group in Model.ExceptionsDataModel)
             {
                 <tr>
@@ -94,14 +94,14 @@
                     <td>@group.uccid</td>
                 </tr>
             }
-        </tbody>
+        </tbody>*@
     </table>
     }
-    <script>
+   @* <script>
         var inputField = document.getElementById("pop");   
         inputField.value  = "Exceptions"
         
-    </script>
+    </script>*@
 
 @section Scripts{
     <script src="~/js/Filter.js"></script>

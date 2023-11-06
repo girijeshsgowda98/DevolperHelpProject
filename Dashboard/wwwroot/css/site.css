@@ -57,7 +57,7 @@ span {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#popup {
+/*#popup {
     position: absolute;
     display: none;
     background-color: white;
@@ -65,7 +65,7 @@ span {
     padding: 10px;
     max-width: 80%;
     z-index: 9999;
-}
+}*/
 
 table td {
     max-width: 120px;
@@ -79,3 +79,24 @@ table.inputs td {
     padding: 5px;
 }
 
+.overflow-container {
+    position: relative;
+    width: 200px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+}
+
+.overflow-content {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+}

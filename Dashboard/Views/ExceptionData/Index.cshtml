@@ -20,14 +20,14 @@
     <partial name="_filterLogic" />
 
 <h4>Exception List</h4>
-    <table id="tblExceptionData">
+    <table class="content-table">
     <thead>
         <tr>
             <th>ModuleName</th>
             <th>TotalException</th>
         </tr>
     </thead>
-    @*<tbody>
+    <tbody>
         @foreach (var @group in Model.ExceptionsDataModel)
         {
             <tr>
@@ -36,7 +36,7 @@
 
             </tr>
         }
-    </tbody>*@
+    </tbody>
 </table>
 </br>
 <h4>Exception Top 3 based on Action</h4>
